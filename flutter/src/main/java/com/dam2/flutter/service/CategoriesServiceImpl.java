@@ -36,6 +36,8 @@ public class CategoriesServiceImpl implements CategoriesService{
     public void deleteById(Long id) {
         cateogiresDAO.deleteById(id); //deleteById = metodo JpaRepository para borrar categoria por id
     }
+
+
 }
 
 
