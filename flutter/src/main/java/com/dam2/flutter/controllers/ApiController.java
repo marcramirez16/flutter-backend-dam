@@ -171,19 +171,19 @@ public ResponseEntity<Categories> updateCategory(@PathVariable Long id, @Request
 //OBJETIVOS!!--------------------------------------------------------------------------------------
 // metodo para retornar objetivos
 @GetMapping("/achievements/{categoryid}") //GetMapping devuelve una lista de
-public List<Achievements> getAchievementsByCategory(@PathVariable Long idCategory) { //buscar por categoria
-    return achievementsService.findByCategoryId(idCategory); //metodo para retornar la lista
+public List<Achievements> getAchievementsByCategory(@PathVariable Long categoryid) { //buscar por categoria
+    return achievementsService.findByCategoryId(categoryid); //metodo para retornar la lista
 }
-
-
+/* 
 @GetMapping("/category/{categoryid}")
 public ResponseEntity<List<Achievements>> findByCategoryId(@PathVariable Long categoryid) {
-    List<Achievements> achievements = achievementsService.findByCategoryId(categoryid);
+    List<Achievements> achievements = achievementService.findByCategoryId(categoryid);
     if (achievements.isEmpty()) {
         return ResponseEntity.notFound().build();
     }
     return ResponseEntity.ok(achievements);
-}
+} 
+*/
 
 // guardar nuevo objetivo
 @PostMapping("/achievements")
@@ -222,7 +222,7 @@ public ResponseEntity<Achievements> updateAchivement(@PathVariable Long id, @Req
     }
     
     existingAchivement.setId(updatedAchivement.getId()); //cambiar valor
-    existingAchivement.setIdCategory(updatedAchivement.getIdCategory()); //cambiar valor
+    existingAchivement.setCategoryid(updatedAchivement.getCategoryid()); //cambiar valor
     existingAchivement.setDescription(updatedAchivement.getDescription()); //cambiar valor
     existingAchivement.setTitle(updatedAchivement.getTitle()); //cambiar valor
 

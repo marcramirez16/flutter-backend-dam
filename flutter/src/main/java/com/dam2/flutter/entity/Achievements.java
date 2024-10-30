@@ -22,7 +22,7 @@ public class Achievements {
     private Long id;
 
     @Column(name = "categoryid") //la columna es categoryid
-    private Long idCategory;
+    private Long categoryid;
 
     @Column(name = "title") //la columna es title
     private String title;
@@ -35,9 +35,9 @@ public class Achievements {
     }
 
     //constructor 2
-    public Achievements(Long id, Long idCategory, String title, String description) {
+    public Achievements(Long id, Long categoryid, String title, String description) {
         this.id = id;
-        this.idCategory = idCategory;
+        this.categoryid = categoryid;
         this.title = title;
         this.description = description;
     }
@@ -52,13 +52,13 @@ public class Achievements {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public Long getIdCategory() {
-        return id;
+    
+    public Long getCategoryid() {
+        return categoryid;
     }
-
-    public void setIdCategory(Long idCategory) {
-        this.idCategory = idCategory;
+    
+    public void setCategoryid(Long categoryid) {
+        this.categoryid = categoryid;
     }
 
     public String getTitle() {
@@ -80,7 +80,7 @@ public class Achievements {
     //metodo tostring para imprimir los datos de el objetivo
     @Override
     public String toString() {
-        return "Achievements [id=" + id + ", idCategory=" + idCategory +", title=" + title + ", description=" + description +"]";
+        return "Achievements [id=" + id + ", idCategory=" + categoryid +", title=" + title + ", description=" + description +"]";
     }
 
 }

@@ -20,9 +20,8 @@ public class AchievementsServiceImpl implements AchievementsService {
     //RETORNA una lista de todos los objetivos de la categoria
     @Override
     public List<Achievements> findByCategoryId(Long categoryid) {
-        return achievementsDAO.findByCategoryId(categoryid); 
+        return achievementsDAO.findByCategoryid(null); 
     }
-
 
     //RETORNA un objetivo por su id, devuelve null si no existe
     @Override

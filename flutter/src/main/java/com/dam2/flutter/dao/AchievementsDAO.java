@@ -19,9 +19,11 @@ import java.util.List;
 //Achievements "objetos de tipo objetivos"
 //Long "tipo del identificador id de objetivo"
 public interface AchievementsDAO extends JpaRepository<Achievements, Long>{
-    List<Achievements> findByCategoryId(Long idCategory);
+    List<Achievements> findByCategoryid(Long categoryid);
 
-
+    //@Query("SELECT a.title, a.description FROM Achievements a WHERE a.categoryid= :categoryid")
+    //List<Achievements> findByCategoryId(@Param("categoryid") Long categoryid);
+    
 }
 
 
