@@ -2,6 +2,7 @@ package com.dam2.flutter.controllers;
 
 import java.util.List;
 
+import org.hibernate.engine.internal.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -170,20 +171,39 @@ public ResponseEntity<Categories> updateCategory(@PathVariable Long id, @Request
 
 //OBJETIVOS!!--------------------------------------------------------------------------------------
 // metodo para retornar objetivos
-@GetMapping("/achievements/{categoryid}") //GetMapping devuelve una lista de
+
+/*@GetMapping("/achievements/{categoryid}") //GetMapping devuelve una lista de
 public List<Achievements> getAchievementsByCategory(@PathVariable Long categoryid) { //buscar por categoria
     return achievementsService.findByCategoryId(categoryid); //metodo para retornar la lista
-}
-/* 
-@GetMapping("/category/{categoryid}")
+}*/
+ 
+/*@GetMapping("/category/{categoryid}")
 public ResponseEntity<List<Achievements>> findByCategoryId(@PathVariable Long categoryid) {
-    List<Achievements> achievements = achievementService.findByCategoryId(categoryid);
+    List<Achievements> achievements = achievementsService.findByCategoryId(categoryid);
     if (achievements.isEmpty()) {
         return ResponseEntity.notFound().build();
     }
     return ResponseEntity.ok(achievements);
-} 
-*/
+} */
+
+
+
+
+/*@GetMapping("/category/{categoryid}")
+public ResponseEntity<List<Achievements>> findByCategoryId(@PathVariable Long categoryid) {
+    List<Achievements> achievements = achievementsService.findByCategoryId(categoryid);
+    return ResponseEntity.ok(achievements); // Siempre devuelve un objeto JSON, vacío o con datos
+}*/
+
+@GetMapping("/achievements/category/{categoryId}")
+public ResponseEntity<List<Achievements>> findAchievementsByCategoryId(@PathVariable Long categoryId) {
+    List<Achievements> achievements = achievementsService.findByCategoryId(categoryId);
+    if (achievements.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(achievements);
+}
+
 
 // guardar nuevo objetivo
 @PostMapping("/achievements")

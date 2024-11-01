@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FlutterApplication<bitacora>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.dam2.flutter.FlutterApplication",
+            "projectName": "bitacora",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
