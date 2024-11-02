@@ -9,7 +9,7 @@ public interface CategoriesService {
     Categories findById(Long id);
     Categories save(Categories categories);
     void deleteById(Long id);
-    
+
 }
 
 

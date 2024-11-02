@@ -21,9 +21,6 @@ import java.util.List;
 public interface AchievementsDAO extends JpaRepository<Achievements, Long>{
     List<Achievements> findByCategoryid(Long categoryid);
 
-    //@Query("SELECT a FROM Achievements a WHERE a.categoryid = :categoryid")
-    //List<Achievements> findByCategoryId(@Param("categoryid") Long categoryid);
-      
 }
 
 

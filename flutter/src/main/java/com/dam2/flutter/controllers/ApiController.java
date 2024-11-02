@@ -42,8 +42,7 @@ public class ApiController {
     private AchievementsService achievementsService; //objeto de la interfaz AchievementsService "tendra los atributos de la classe Achievements desde achivementsdao..."
 
 //USUARIOS!!----------------------------------------------------------------------------------------
-
-// metodo para retornar usuario
+// metodo para retornar usuarios
     @GetMapping("/users") //GetMapping devuelve una lista de
     public List<Users> findAllUsers() {
         return usersService.findAll(); //metodo para retornar
@@ -171,30 +170,6 @@ public ResponseEntity<Categories> updateCategory(@PathVariable Long id, @Request
 
 //OBJETIVOS!!--------------------------------------------------------------------------------------
 // metodo para retornar objetivos
-
-/*@GetMapping("/achievements/{categoryid}") //GetMapping devuelve una lista de
-public List<Achievements> getAchievementsByCategory(@PathVariable Long categoryid) { //buscar por categoria
-    return achievementsService.findByCategoryId(categoryid); //metodo para retornar la lista
-}*/
- 
-/*@GetMapping("/category/{categoryid}")
-public ResponseEntity<List<Achievements>> findByCategoryId(@PathVariable Long categoryid) {
-    List<Achievements> achievements = achievementsService.findByCategoryId(categoryid);
-    if (achievements.isEmpty()) {
-        return ResponseEntity.notFound().build();
-    }
-    return ResponseEntity.ok(achievements);
-} */
-
-
-
-
-/*@GetMapping("/category/{categoryid}")
-public ResponseEntity<List<Achievements>> findByCategoryId(@PathVariable Long categoryid) {
-    List<Achievements> achievements = achievementsService.findByCategoryId(categoryid);
-    return ResponseEntity.ok(achievements); // Siempre devuelve un objeto JSON, vacío o con datos
-}*/
-
 @GetMapping("/achievements/category/{categoryId}")
 public ResponseEntity<List<Achievements>> findAchievementsByCategoryId(@PathVariable Long categoryId) {
     List<Achievements> achievements = achievementsService.findByCategoryId(categoryId);
