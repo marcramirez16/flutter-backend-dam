@@ -1,10 +1,12 @@
 package com.dam2.flutter.service;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.dam2.flutter.dao.UsersDAO;
 import com.dam2.flutter.entity.Users;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 //metodos para retornar y actualizar datos del usuario
 @Service

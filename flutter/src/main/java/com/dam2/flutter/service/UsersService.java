@@ -1,7 +1,8 @@
 package com.dam2.flutter.service;
 
-import java.util.List;
 import com.dam2.flutter.entity.Users;
+
+import java.util.List;
 
 //interfaz con los metodos de UsersService que implementa los datos de la bd
 public interface UsersService {

@@ -1,14 +1,12 @@
 package com.dam2.flutter.service;
 
+import com.dam2.flutter.dao.AchievementsDAO;
+import com.dam2.flutter.entity.Achievements;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.dam2.flutter.dao.AchievementsDAO;
-import com.dam2.flutter.dao.CategoriesDAO;
-import com.dam2.flutter.entity.Achievements;
-import com.dam2.flutter.entity.Categories;
-
 
 //metodos para retornar y actualizar datos de el objetivo
 @Service
@@ -42,8 +40,3 @@ public class AchievementsServiceImpl implements AchievementsService {
         achievementsDAO.deleteById(id); //deleteById = metodo JpaRepository para borrar objetivo por id
     }
 }
-
-
-
-
-

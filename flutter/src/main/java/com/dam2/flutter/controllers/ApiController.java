@@ -2,7 +2,15 @@ package com.dam2.flutter.controllers;
 
 import java.util.List;
 
-import org.hibernate.engine.internal.Collections;
+import com.dam2.flutter.entity.Achievements;
+import com.dam2.flutter.entity.Categories;
+import com.dam2.flutter.entity.UserAchievements;
+import com.dam2.flutter.entity.Users;
+import com.dam2.flutter.service.CategoriesService;
+import com.dam2.flutter.service.UsersService;
+import com.dam2.flutter.service.AchievementsService;
+import com.dam2.flutter.service.UserAchievementsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +20,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.dam2.flutter.entity.Achievements;
-import com.dam2.flutter.entity.Categories;
-import com.dam2.flutter.entity.Users;
-import com.dam2.flutter.service.CategoriesService;
-import com.dam2.flutter.service.UsersService;
-import com.dam2.flutter.service.AchievementsService;
-
 
 //EN ESTA CLASSE ESTARAN TODOS LOS METODOS UTILES PARA EDITAR EDITAR USUARIOS Y DIRIGRLOS A LAS BD O AL CONTRARIO
 
@@ -39,7 +40,11 @@ public class ApiController {
 
     //objeto para guardar los objetivos
     @Autowired //inyeccion de dependencias
-    private AchievementsService achievementsService; //objeto de la interfaz AchievementsService "tendra los atributos de la classe Achievements desde achivementsdao..."
+    private AchievementsService achievementsService; //objeto de la interfaz AchievementsService "tendra los atributos de la classe Achievements desde achievementsdao..."
+
+    //objeto para guardar los objetivos
+    @Autowired //inyeccion de dependencias
+    private UserAchievementsService userachievementsService; //objeto de la interfaz UserAchievementsService "tendra los atributos de la classe UserAchievements desde achievementsdao..."
 
 //USUARIOS!!----------------------------------------------------------------------------------------
 // metodo para retornar usuarios
@@ -97,7 +102,7 @@ public class ApiController {
         return ResponseEntity.ok(existingUser); //retornar mensaje y usuario nuevo
     }
 
-//actualizar biographya del usuario
+//actualizar biografía del usuario
     @PutMapping("/users/{id}/biography")
     public ResponseEntity<Users> updateBiography(@PathVariable Long id, @RequestBody Users updatedUser) { //pasar id y usuario con biografia nueva
         System.out.println("Received request to update biography for user id: " + id);
@@ -115,115 +120,147 @@ public class ApiController {
 
 //CATEGORIAS!!--------------------------------------------------------------------------------------
 
-// metodo para retornar Categoria
-@GetMapping("/categories") //GetMapping devuelve una lista de
-public List<Categories> findAllCategories() {
-    return categoriesService.findAll(); //metodo para retornar
-}
-
-// guardar nueva categoria
-@PostMapping("/categories")
-@ResponseStatus(HttpStatus.CREATED)
-public Categories createCategory(@RequestBody Categories newCategory) { //pasar nueva categoria
-    return categoriesService.save(newCategory); //metodo para guardar una nueva categoria
-}
-
-// borrar categoria
-@DeleteMapping("/categories/{id}")
-public ResponseEntity<String> deleteCategory(@PathVariable Long id) { //pasar id
-    Categories category = categoriesService.findById(id); //crear objeto de la categoria creada
-    if (category == null) {
-        return ResponseEntity.notFound().build(); //si  no se encuentra la categoria, devuelve mensaje
+    // metodo para retornar Categoria
+    @GetMapping("/categories") //GetMapping devuelve una lista de
+    public List<Categories> findAllCategories() {
+        return categoriesService.findAll(); //metodo para retornar
     }
 
-    categoriesService.deleteById(id); //borrar categoria por su id
-
-    return ResponseEntity.ok("Deleted category id - " + id);
-}
-
-// devolver categoria por su id
-@GetMapping("/categories/{id}")
-public ResponseEntity<Categories> findCategoryById(@PathVariable Long id) { //pasar id
-    Categories category = categoriesService.findById(id); //buscar por id
-    if (category == null) {
-        return ResponseEntity.notFound().build(); //mandar mensaje si no existe
+    // guardar nueva categoria
+    @PostMapping("/categories")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Categories createCategory(@RequestBody Categories newCategory) { //pasar nueva categoria
+        return categoriesService.save(newCategory); //metodo para guardar una nueva categoria
     }
-    return ResponseEntity.ok(category); //retornar mensaje y categoria
-}
 
-//actualizar categoria pr su id
-@PutMapping("/categories/{id}")
-public ResponseEntity<Categories> updateCategory(@PathVariable Long id, @RequestBody Categories updatedCategory) { //pasar id y nuevos datos categoria
-    Categories existingCategory = categoriesService.findById(id); //buscar pod id
-    if (existingCategory == null) {
-        return ResponseEntity.notFound().build(); //si no existe mandar error
+    // borrar categoria
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long id) { //pasar id
+        Categories category = categoriesService.findById(id); //crear objeto de la categoria creada
+        if (category == null) {
+            return ResponseEntity.notFound().build(); //si  no se encuentra la categoria, devuelve mensaje
+        }
+
+        categoriesService.deleteById(id); //borrar categoria por su id
+
+        return ResponseEntity.ok("Deleted category id - " + id);
     }
-    
-    existingCategory.setId(updatedCategory.getId()); //cambiar valor
-    existingCategory.setName(updatedCategory.getName()); //cambiar valor
-    existingCategory.setIcon(updatedCategory.getIcon());         //cambiar valor
 
-    categoriesService.save(existingCategory); //guardar usuario
-    
-    return ResponseEntity.ok(existingCategory); //retornar mensaje y usuario nuevo
-}
+    // devolver categoria por su id
+    @GetMapping("/categories/{id}")
+    public ResponseEntity<Categories> findCategoryById(@PathVariable Long id) { //pasar id
+        Categories category = categoriesService.findById(id); //buscar por id
+        if (category == null) {
+            return ResponseEntity.notFound().build(); //mandar mensaje si no existe
+        }
+        return ResponseEntity.ok(category); //retornar mensaje y categoria
+    }
+
+    //actualizar categoria pr su id
+    @PutMapping("/categories/{id}")
+    public ResponseEntity<Categories> updateCategory(@PathVariable Long id, @RequestBody Categories updatedCategory) { //pasar id y nuevos datos categoria
+        Categories existingCategory = categoriesService.findById(id); //buscar pod id
+        if (existingCategory == null) {
+            return ResponseEntity.notFound().build(); //si no existe mandar error
+        }
+        
+        existingCategory.setId(updatedCategory.getId()); //cambiar valor
+        existingCategory.setName(updatedCategory.getName()); //cambiar valor
+        existingCategory.setIcon(updatedCategory.getIcon());         //cambiar valor
+
+        categoriesService.save(existingCategory); //guardar usuario
+        
+        return ResponseEntity.ok(existingCategory); //retornar mensaje y usuario nuevo
+    }
 
 //OBJETIVOS!!--------------------------------------------------------------------------------------
 // metodo para retornar objetivos
-@GetMapping("/achievements/category/{categoryId}")
-public ResponseEntity<List<Achievements>> findAchievementsByCategoryId(@PathVariable Long categoryId) {
-    List<Achievements> achievements = achievementsService.findByCategoryId(categoryId);
-    if (achievements.isEmpty()) {
-        return ResponseEntity.notFound().build();
+    @GetMapping("/achievements/category/{categoryId}")
+    public ResponseEntity<List<Achievements>> findAchievementsByCategoryId(@PathVariable Long categoryId) {
+        List<Achievements> achievements = achievementsService.findByCategoryId(categoryId);
+        if (achievements.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(achievements);
     }
-    return ResponseEntity.ok(achievements);
-}
 
 
 // guardar nuevo objetivo
-@PostMapping("/achievements")
-@ResponseStatus(HttpStatus.CREATED)
-public Achievements createAchievement(@RequestBody Achievements newAchievement) { //pasar nuevo objetivo
-    return achievementsService.save(newAchievement); //metodo para guardar un nuevo objetivo
-}
+    @PostMapping("/achievements")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Achievements createAchievement(@RequestBody Achievements newAchievement) { //pasar nuevo objetivo
+        return achievementsService.save(newAchievement); //metodo para guardar un nuevo objetivo
+    }
 
 // borrar objetivo
-@DeleteMapping("/achievements/{id}")
-public ResponseEntity<String> deleteAchievement(@PathVariable Long id) { //pasar id
-    Achievements achievement = achievementsService.findById(id); //crear objeto de el objeto creado
-    if (achievement == null) {
-        return ResponseEntity.notFound().build(); //si  no se encuentra el objetivo, devuelve mensaje
+    @DeleteMapping("/achievements/{id}")
+    public ResponseEntity<String> deleteAchievement(@PathVariable Long id) { //pasar id
+        Achievements achievement = achievementsService.findById(id); //crear objeto de el objeto creado
+        if (achievement == null) {
+            return ResponseEntity.notFound().build(); //si  no se encuentra el objetivo, devuelve mensaje
+        }
+        achievementsService.deleteById(id); //borrar objetivo por su id
+        return ResponseEntity.ok("Deleted Achievement id - " + id);
     }
-    achievementsService.deleteById(id); //borrar objetivo por su id
-    return ResponseEntity.ok("Deleted Achievement id - " + id);
-}
 
 // devolver objetivo por su id
-@GetMapping("/achievements/{id}")
-public ResponseEntity<Achievements> findAchivementById(@PathVariable Long id) { //pasar id
-    Achievements achivement = achievementsService.findById(id); //buscar por id
-    if (achivement == null) {
-        return ResponseEntity.notFound().build(); //mandar mensaje si no existe
+    @GetMapping("/achievements/{id}")
+    public ResponseEntity<Achievements> findAchievementById(@PathVariable Long id) { //pasar id
+        Achievements achievement = achievementsService.findById(id); //buscar por id
+        if (achievement == null) {
+            return ResponseEntity.notFound().build(); //mandar mensaje si no existe
+        }
+        return ResponseEntity.ok(achievement); //retornar mensaje y categoria
     }
-    return ResponseEntity.ok(achivement); //retornar mensaje y categoria
-}
 
 //actualizar objetivo pr su id
-@PutMapping("/achievements/{id}")
-public ResponseEntity<Achievements> updateAchivement(@PathVariable Long id, @RequestBody Achievements updatedAchivement) { //pasar id y nuevos datos objetivo
-    Achievements existingAchivement = achievementsService.findById(id); //buscar pod id
-    if (existingAchivement == null) {
-        return ResponseEntity.notFound().build(); //si no existe mandar error
-    }
-    
-    existingAchivement.setId(updatedAchivement.getId()); //cambiar valor
-    existingAchivement.setCategoryid(updatedAchivement.getCategoryid()); //cambiar valor
-    existingAchivement.setDescription(updatedAchivement.getDescription()); //cambiar valor
-    existingAchivement.setTitle(updatedAchivement.getTitle()); //cambiar valor
+    @PutMapping("/achievements/{id}")
+    public ResponseEntity<Achievements> updateAchievement(@PathVariable Long id, @RequestBody Achievements updatedAchievement) { //pasar id y nuevos datos objetivo
+        Achievements existingAchievement = achievementsService.findById(id); //buscar pod id
+        if (existingAchievement == null) {
+            return ResponseEntity.notFound().build(); //si no existe mandar error
+        }
+        
+        existingAchievement.setId(updatedAchievement.getId()); //cambiar valor
+        existingAchievement.setCategoryid(updatedAchievement.getCategoryid()); //cambiar valor
+        existingAchievement.setDescription(updatedAchievement.getDescription()); //cambiar valor
+        existingAchievement.setTitle(updatedAchievement.getTitle()); //cambiar valor
 
-    achievementsService.save(existingAchivement); //guardar objetivo
-    
-    return ResponseEntity.ok(existingAchivement); //retornar mensaje y objetivo nuevo
-}
+        achievementsService.save(existingAchievement); //guardar objetivo
+        
+        return ResponseEntity.ok(existingAchievement); //retornar mensaje y objetivo nuevo
+    }
+
+//USERACHIEVEMENTS!!--------------------------------------------------------------------------------------
+// devolver si el userachievements existe o no
+    @GetMapping("/userachievements/{achievementId}/{userId}")
+    public ResponseEntity<UserAchievements> findUserAchievementByBothId(@PathVariable Long achievementId, @PathVariable Long userId) {
+        UserAchievements userAchievement = userachievementsService.findByBothId(achievementId, userId);
+        if (userAchievement == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(userAchievement);
+    }
+
+    @PostMapping("/userachievement")
+    public ResponseEntity<?> createUserAchievement(
+            @RequestParam Long achievementId,
+            @RequestParam Long userId) {
+        UserAchievements newAchievement = new UserAchievements(null, achievementId, userId, 0, 0);
+        userachievementsService.save(newAchievement);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping("/userachievement/{achievementId}/{userId}")
+    public ResponseEntity<?> deleteUserAchievement(
+            @PathVariable Long achievementId,
+            @PathVariable Long userId) {
+        UserAchievements userAchievement = userachievementsService.findByBothId(achievementId, userId);
+        if (userAchievement != null) {
+            userachievementsService.deleteById(userAchievement.getId());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 
 }
