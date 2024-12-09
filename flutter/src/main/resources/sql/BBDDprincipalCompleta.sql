@@ -30,20 +30,26 @@ CREATE TABLE Userachievements (
   achievementid int,
   userid int,
   likes int,
-  dislikes int,
-  compliment char(1)
+  dislikes int
 );
 
-CREATE TABLE Friends (
-	username varchar(20) primary key,
-    namefriend varchar(20)
+CREATE TABLE Friendships (
+  friendship int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  friendA int,
+  friendB int
+);
+
+CREATE TABLE FriendRequests (
+  friendrequests int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  userSender int,
+  userReciever int
 );
 
 CREATE TABLE Messages(
-	idmessage int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	idtransmitter int,
-    idreceiver int,
-    message varchar(1000)
+  id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	senderid int,
+  receiverid int,
+  message varchar(1000)
 );
 
 #Añadimos usuarios

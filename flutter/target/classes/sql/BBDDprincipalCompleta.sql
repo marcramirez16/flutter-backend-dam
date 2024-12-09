@@ -33,6 +33,25 @@ CREATE TABLE Userachievements (
   dislikes int
 );
 
+CREATE TABLE Friendships (
+  friendship int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  friendA int,
+  friendB int
+);
+
+CREATE TABLE FriendRequests (
+  friendrequests int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  userSender int,
+  userReciever int
+);
+
+CREATE TABLE Messages(
+  id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	senderid int,
+  receiverid int,
+  message varchar(1000)
+);
+
 #Añadimos usuarios
 
 INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, '');
