@@ -25,7 +25,7 @@ title varchar(60) NOT NULL,
 description varchar(128) NOT NULL
 );
 
-CREATE TABLE Userachievements (
+CREATE TABLE User_achievements (
   id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   achievementid int,
   userid int,
@@ -56,13 +56,14 @@ CREATE TABLE Messages(
 
 INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, '');
 INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '');
-INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '');
+INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Miguel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '');
 
 #Añadimos las categorias
 
 INSERT INTO Categories (name, icon) VALUES ('Musica', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Gastronomia', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Anime', NULL);
+INSERT INTO Categories (name, icon) VALUES ('Ver para Creer', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Lectura', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Deporte', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Cine', NULL);
