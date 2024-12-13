@@ -4,9 +4,13 @@ import java.util.List;
 
 import com.dam2.flutter.entity.Achievements;
 import com.dam2.flutter.entity.Categories;
+import com.dam2.flutter.entity.FriendRequests;
+import com.dam2.flutter.entity.Friendships;
 import com.dam2.flutter.entity.UserAchievements;
 import com.dam2.flutter.entity.Users;
 import com.dam2.flutter.service.CategoriesService;
+import com.dam2.flutter.service.FriendRequestsService;
+import com.dam2.flutter.service.FriendshipsService;
 import com.dam2.flutter.service.UsersService;
 import com.dam2.flutter.service.AchievementsService;
 import com.dam2.flutter.service.UserAchievementsService;
@@ -45,6 +49,14 @@ public class ApiController {
     //objeto para guardar los objetivos
     @Autowired //inyeccion de dependencias
     private UserAchievementsService userachievementsService; //objeto de la interfaz UserAchievementsService "tendra los atributos de la classe UserAchievements desde achievementsdao..."
+
+    //objeto para guardar los amigos
+    @Autowired
+    private FriendshipsService friendshipsService;
+
+    //objeto para guardar las solicitudes de amistad
+    @Autowired
+    private FriendRequestsService friendRequestsService;
 
 //USUARIOS!!----------------------------------------------------------------------------------------
 // metodo para retornar usuarios
@@ -261,6 +273,19 @@ public class ApiController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+//FRIENDS!!--------------------------------------------------------------------------------------
+    // Obtener todas las amistades
+    @GetMapping("/friendships")
+    public List<Friendships> getAllFriendships() {
+        return friendshipsService.findAll();
+    }
+
+//FRIENDSREQUESTS!!--------------------------------------------------------------------------------------
+    // Obtener todas las solicitudes de amistad
+    @GetMapping("/friendrequests")
+    public List<FriendRequests> getAllFriendRequests() {
+        return friendRequestsService.findAll();
     }
 
 }

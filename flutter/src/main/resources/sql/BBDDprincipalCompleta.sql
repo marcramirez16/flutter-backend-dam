@@ -68,6 +68,15 @@ INSERT INTO Categories (name, icon) VALUES ('Deporte', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Cine', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Estudio', NULL);
 
+#añadimos algunos amigos y solicitudes de amistad
+
+INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
+INSERT INTO Friendships (friendA, friendB) VALUES (2, 3);
+
+INSERT INTO FriendRequests (userSender, userReciever) VALUES (2,1);
+INSERT INTO FriendRequests (userSender, userReciever) VALUES (3,1);
+
+
 #Añadimos los logros (id 1 = Musica)
 
 INSERT INTO Achievements (categoryid, title, description) VALUES (1,'Introducción a la música','Escucha un proyecto de cualquier artista.');
