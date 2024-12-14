@@ -19,7 +19,7 @@ public class UserAchievementsServiceImpl implements UserAchievementsService {
     public List<UserAchievements> findByAchievementId(Long achievementId) {
         return userAchievementsDAO.findByAchievementid(achievementId);
     }
-
+    
     @Override
     public List<UserAchievements> findByUserId(Long userId) {
         return userAchievementsDAO.findByUserid(userId);

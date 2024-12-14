@@ -8,7 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 
 @Entity //tabla conectada a la bd
-@Table(name = "UserAchievements") //el nombre de la tabla es: "UserAchievements"
+@Table(name = "Userachievements") //el nombre de la tabla es: "UserAchievements"
 public class UserAchievements {
 
     //attributos de los objetivos
@@ -91,14 +91,14 @@ public class UserAchievements {
         return "UserAchievements [id=" + id + ", idAchievement=" + achievementid +", idUser=" + userid + ", likes=" + likes + ", dislikes=" + dislikes +"]";
     }
 
-    public boolean isEmpty() {
+    //public boolean isEmpty() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
-    }
+      //  throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+    //}
 
-    public UserAchievements get(int i) {
+    //public UserAchievements get(int i) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
-    }
+      //  throw new UnsupportedOperationException("Unimplemented method 'get'");
+    //}
 
 }

@@ -3,13 +3,13 @@ package com.dam2.flutter.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "FriendRequests")
+@Table(name = "Friendrequests")
 public class FriendRequests {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "friendrequests")
-    private Long friendrequests;
+    @Column(name = "friendrequest")
+    private Long friendrequest;
 
     @Column(name = "userSender")
     private Long userSender;
@@ -19,18 +19,18 @@ public class FriendRequests {
 
     public FriendRequests() {}
 
-    public FriendRequests(Long friendrequests, Long userSender, Long userReciever) {
-        this.friendrequests = friendrequests;
+    public FriendRequests(Long friendrequest, Long userSender, Long userReciever) {
+        this.friendrequest = friendrequest;
         this.userSender = userSender;
         this.userReciever = userReciever;
     }
 
     public Long getFriendrequests() {
-        return friendrequests;
+        return friendrequest;
     }
 
-    public void setFriendrequests(Long friendrequests) {
-        this.friendrequests = friendrequests;
+    public void setFriendrequests(Long friendrequest) {
+        this.friendrequest = friendrequest;
     }
 
     public Long getUserSender() {

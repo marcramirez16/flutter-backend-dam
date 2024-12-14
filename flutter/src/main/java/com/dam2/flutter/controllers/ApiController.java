@@ -243,6 +243,12 @@ public class ApiController {
         return ResponseEntity.ok(existingAchievement); //retornar mensaje y objetivo nuevo
     }
 
+    @GetMapping("/Achievements")
+    public List<Achievements> getAchievements() {
+        return achievementsService.findAll();
+    }
+
+
 //USERACHIEVEMENTS!!--------------------------------------------------------------------------------------
 // devolver si el userachievements existe o no
     @GetMapping("/userachievements/{achievementId}/{userId}")
@@ -273,6 +279,18 @@ public class ApiController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+//
+    @GetMapping("/userachievement/{userId}")
+    public ResponseEntity<List<UserAchievements>> findUserAchievementsByUserId(@PathVariable Long userId) {
+        // Usar el servicio para buscar los logros por userId
+        List<UserAchievements> userAchievements = userachievementsService.findByUserId(userId);
+
+        // Verificar si la lista está vacía y devolver la respuesta adecuada
+        if (userAchievements.isEmpty()) {
+            return ResponseEntity.noContent().build(); // HTTP 204 No Content si no hay resultados
+        }
+        return ResponseEntity.ok(userAchievements); // HTTP 200 OK con la lista de logros
     }
 //FRIENDS!!--------------------------------------------------------------------------------------
     // Obtener todas las amistades

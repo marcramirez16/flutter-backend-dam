@@ -18,7 +18,8 @@ public interface UserAchievementsDAO extends JpaRepository<UserAchievements, Lon
     UserAchievements findByBothId(@Param("achievementId") Long achievementId, @Param("userId") Long userId);
 
     List<UserAchievements> findByAchievementid(Long achievementId);
-
+    
     List<UserAchievements> findByUserid(Long userId);
+
 }
 

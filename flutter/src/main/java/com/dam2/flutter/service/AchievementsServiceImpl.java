@@ -39,4 +39,10 @@ public class AchievementsServiceImpl implements AchievementsService {
     public void deleteById(Long id) {
         achievementsDAO.deleteById(id); //deleteById = metodo JpaRepository para borrar objetivo por id
     }
+
+    //retornar todo
+    @Override
+    public List<Achievements> findAll() {
+        return achievementsDAO.findAll();
+    }
 }

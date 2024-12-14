@@ -10,5 +10,8 @@ public interface AchievementsService {
     Achievements findById(Long id);
     Achievements save(Achievements achievements);
     void deleteById(Long id);
+
+    List<Achievements> findAll();
+
     
 }
