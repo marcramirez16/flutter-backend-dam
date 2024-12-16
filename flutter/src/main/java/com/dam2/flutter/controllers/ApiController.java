@@ -85,15 +85,6 @@ public class ApiController {
         return ResponseEntity.ok("Deleted user id - " + id);
     }
 
-// devolver usuario por su id
-    @GetMapping("/users/{id}")
-    public ResponseEntity<Users> findUserById(@PathVariable Long id) { //pasar id
-        Users user = usersService.findById(id); //buscar por id
-        if (user == null) {
-            return ResponseEntity.notFound().build(); //mandar mensaje si no existe
-        }
-        return ResponseEntity.ok(user); //retornar mensaje y usuario
-    }
 
 //actualizar usuario pr su id
     @PutMapping("/users/{id}")
@@ -128,6 +119,11 @@ public class ApiController {
         usersService.save(existingUser); //actualizar el usuario
         
         return ResponseEntity.ok(existingUser); //retornar mensaje y usuario nuevo
+    }
+    //obtener usuario por id
+    @GetMapping("/users/{id}")
+    public Users getUserById(@PathVariable Long id) {
+        return usersService.findById(id); // Llama al servicio que busca por ID
     }
 
 //CATEGORIAS!!--------------------------------------------------------------------------------------

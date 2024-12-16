@@ -11,10 +11,10 @@ public class FriendRequests {
     @Column(name = "friendrequest")
     private Long friendrequest;
 
-    @Column(name = "userSender")
+    @Column(name = "usersender")
     private Long userSender;
 
-    @Column(name = "userReciever")
+    @Column(name = "userreciever")
     private Long userReciever;
 
     public FriendRequests() {}
