@@ -18,4 +18,20 @@ public class FriendshipsServiceImpl implements FriendshipsService {
     public List<Friendships> findAll() {
         return friendshipsDAO.findAll();
     }
+
+    @Override
+    public Friendships saveFriendship(Friendships friendship) {
+        return friendshipsDAO.save(friendship); 
+    }
+
+    @Override
+    public void deleteFriendship(Long friendshipId) {
+        friendshipsDAO.deleteById(friendshipId);  
+    }
+
+    @Override
+    public Friendships findById(Long friendshipId) {
+        return friendshipsDAO.findById(friendshipId).orElse(null);
+
+    }
 }

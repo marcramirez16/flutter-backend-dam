@@ -120,11 +120,14 @@ public class ApiController {
         
         return ResponseEntity.ok(existingUser); //retornar mensaje y usuario nuevo
     }
+
     //obtener usuario por id
     @GetMapping("/users/{id}")
     public Users getUserById(@PathVariable Long id) {
         return usersService.findById(id); // Llama al servicio que busca por ID
     }
+
+
 
 //CATEGORIAS!!--------------------------------------------------------------------------------------
 
@@ -295,11 +298,54 @@ public class ApiController {
         return friendshipsService.findAll();
     }
 
+    //agregar amistad
+    @PostMapping("/friendships")
+    @ResponseStatus(HttpStatus.CREATED)  // Esto indica que la amistad se ha creado exitosamente
+    public Friendships createFriendship(@RequestBody Friendships newFriendship) {
+        return friendshipsService.saveFriendship(newFriendship); // Llama al servicio para guardar la nueva amistad
+    }
+
+    @DeleteMapping("/friendships/{friendshipId}")
+    public ResponseEntity<?> deleteFriendship(@PathVariable Long friendshipId) {
+        // Buscar la amistad por su ID
+        Friendships friendship = friendshipsService.findById(friendshipId);
+        
+        // Si la amistad existe, eliminarla
+        if (friendship != null) {
+            friendshipsService.deleteFriendship(friendshipId);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();  
+        }
+        
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
 //FRIENDSREQUESTS!!--------------------------------------------------------------------------------------
     // Obtener todas las solicitudes de amistad
+    
     @GetMapping("/friendrequests")
     public List<FriendRequests> getAllFriendRequests() {
         return friendRequestsService.findAll();
     }
 
+    //agregar amistad
+    @PostMapping("/friendrequests")
+    @ResponseStatus(HttpStatus.CREATED)  // Esto indica que la amistad se ha creado exitosamente
+    public FriendRequests createFriendRequests(@RequestBody FriendRequests friendRequest) {
+        return friendRequestsService.saveFriendRequest(friendRequest); // Llama al servicio para guardar la nueva amistad
+    }
+
+    @DeleteMapping("/friendrequests/{friendrequestId}")
+    public ResponseEntity<?> deleteFriendRequest(@PathVariable Long friendrequestId) {
+        // Buscar la solicitud de amistad por su ID
+        FriendRequests friendRequest = friendRequestsService.findById(friendrequestId);
+        
+        // Si la solicitud de amistad existe, eliminarla
+        if (friendRequest != null) {
+            friendRequestsService.deleteFriendRequest(friendrequestId);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();  // Devuelve 204 No Content
+        }
+        
+        // Si la solicitud de amistad no existe, devolver error 404
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
 }

@@ -25,11 +25,11 @@ public class FriendRequests {
         this.userReciever = userReciever;
     }
 
-    public Long getFriendrequests() {
+    public Long getFriendrequest() {
         return friendrequest;
     }
 
-    public void setFriendrequests(Long friendrequest) {
+    public void setFriendrequest(Long friendrequest) {
         this.friendrequest = friendrequest;
     }
 

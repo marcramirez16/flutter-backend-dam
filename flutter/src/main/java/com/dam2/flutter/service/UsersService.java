@@ -12,5 +12,4 @@ public interface UsersService {
     Users save(Users user);
     void deleteById(Long id);
     void updateBiography(Long id, String biography);
-    
 }

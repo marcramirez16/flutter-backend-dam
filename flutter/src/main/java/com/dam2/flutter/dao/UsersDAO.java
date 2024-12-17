@@ -12,5 +12,4 @@ import org.springframework.stereotype.Repository;
 //Users "objetos de tipo users"
 //Long "tipo del identificador id de usuario"
 public interface UsersDAO extends JpaRepository<Users, Long>{
-
 }

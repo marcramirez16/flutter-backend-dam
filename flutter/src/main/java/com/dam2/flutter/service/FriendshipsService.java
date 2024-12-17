@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface FriendshipsService {
     List<Friendships> findAll();
+    Friendships saveFriendship(Friendships friendship); 
+    void deleteFriendship(Long friendshipId);  
+    Friendships findById(Long friendshipId); 
 }

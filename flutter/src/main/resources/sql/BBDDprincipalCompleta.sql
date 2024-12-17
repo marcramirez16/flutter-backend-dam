@@ -40,10 +40,12 @@ CREATE TABLE Friendships (
 );
 
 CREATE TABLE FriendRequests (
-  friendrequests int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  friendrequest int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   userSender int,
   userReciever int
 );
+
+
 
 CREATE TABLE Messages(
   id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -58,6 +60,23 @@ INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) 
 INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '');
 INSERT INTO Users(username, birthday, mail, password, profile_photo, biography) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '');
 
+#Añadir unos cuantos amigos, solicitudes y userachievements a marc
+INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
+
+INSERT INTO FriendRequests (userSender, userReciever) VALUES (3, 1);
+
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (18, 2, 20, 2);
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (20, 1, 2, 13);
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (10, 3, 19, 12);
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (21, 2, 2, 11);
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (22, 1, 3, 12);
+INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (23, 3, 12, 10);
+
+
+select * from Friendships;
+select * from FriendRequests;
+select * from Userachievements;
+
 #Añadimos las categorias
 
 INSERT INTO Categories (name, icon) VALUES ('Musica', NULL);
@@ -67,15 +86,6 @@ INSERT INTO Categories (name, icon) VALUES ('Lectura', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Deporte', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Cine', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Estudio', NULL);
-
-#añadimos algunos amigos y solicitudes de amistad
-
-INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
-INSERT INTO Friendships (friendA, friendB) VALUES (2, 3);
-
-INSERT INTO FriendRequests (userSender, userReciever) VALUES (2,1);
-INSERT INTO FriendRequests (userSender, userReciever) VALUES (3,1);
-
 
 #Añadimos los logros (id 1 = Musica)
 
