@@ -1,6 +1,13 @@
 package com.dam2.flutter.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
+
+import java.util.Base64; 
+import java.nio.file.Path; 
 
 import com.dam2.flutter.entity.Achievements;
 import com.dam2.flutter.entity.Categories;
@@ -86,24 +93,41 @@ public class ApiController {
     }
 
 
-//actualizar usuario pr su id
+//actualizar usuario pr su id    //PARA ACTUALIZAR OTRA COSA QUE NO SEA FOTO PONGA EL CONDICIONAL AL SETPROFILEPHOTO
     @PutMapping("/users/{id}")
     public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users updatedUser) { //pasar id y nuevos datos usuario
         Users existingUser = usersService.findById(id); //buscar pod id
+
         if (existingUser == null) {
             return ResponseEntity.notFound().build(); //si no existe mandar error
         }
-        
-        existingUser.setUsername(updatedUser.getUsername()); //cambiar valor
-        existingUser.setBirthday(updatedUser.getBirthday()); //cambiar valor
-        existingUser.setMail(updatedUser.getMail());         //cambiar valor
-        existingUser.setPassword(updatedUser.getPassword()); //cambiar valor
-        existingUser.setProfilePhoto(updatedUser.getProfilePhoto()); //cambiar valor
+
+            existingUser.setProfilephoto(updatedUser.getProfilephoto());
+
+        // Actualizar solo los campos que no son nulos
+        if (updatedUser.getUsername() != null) {
+            existingUser.setUsername(updatedUser.getUsername()); // Actualizar username
+        }
+        if (updatedUser.getBirthday() != null) {
+            existingUser.setBirthday(updatedUser.getBirthday()); // Actualizar birthday
+        }
+        if (updatedUser.getMail() != null) {
+            existingUser.setMail(updatedUser.getMail()); // Actualizar mail
+        }
+        if (updatedUser.getPassword() != null) {
+            existingUser.setPassword(updatedUser.getPassword()); // Actualizar password
+        }
+        if (updatedUser.getBiography() != null) {
+            existingUser.setBiography(updatedUser.getBiography()); // Actualizar password
+        }
+
 
         usersService.save(existingUser); //guardar usuario
         
         return ResponseEntity.ok(existingUser); //retornar mensaje y usuario nuevo
     }
+
+
 
 //actualizar biografía del usuario
     @PutMapping("/users/{id}/biography")

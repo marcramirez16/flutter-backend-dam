@@ -20,7 +20,6 @@ public class FriendRequestsServiceImpl implements FriendRequestsService {
         return friendRequestsDAO.findAll();
     }
 
-
     @Override
     public void deleteFriendRequest(Long friendrequest) {
         friendRequestsDAO.deleteById(friendrequest); 
@@ -30,13 +29,10 @@ public class FriendRequestsServiceImpl implements FriendRequestsService {
     public FriendRequests findById(Long friendrequestId) {
         return friendRequestsDAO.findById(friendrequestId).orElse(null);  
     }
-
     
     @Override
     public FriendRequests saveFriendRequest(FriendRequests friendrequest) {
         return friendRequestsDAO.save(friendrequest);
     }
-
-
 
 }

@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 @Entity //tabla conectada a la bd
 @Table(name = "Users") //el nombre de la tabla es: "Users"
 public class Users {
-
     //attributos del usuario
 
     @Id //identificador unico
@@ -31,8 +30,11 @@ public class Users {
     @Column(name = "password") //el nombre de la columna es "password"
     private String password;
 
-    @Column(name = "profile_photo") //el nombre de la columna es "profile_photo"
-    private String profilephoto;
+   //el nombre de la columna es "profile_photo"
+    // se haria algo asi? @Column(columnDefinition = "LONGBLOB")
+    //private String profilephoto;
+    @Column(name = "profilephoto")
+    private String profilephoto;  // Cambiado a byte[] para almacenar la imagen como BLOB
 
     @Column(name = "biography") //el nombre de la columna es "biography"
     private String biography;
@@ -42,7 +44,7 @@ public class Users {
     }
 
     //constructor 2
-    public Users(Long id, String username, Year birthday, String mail, String password, String profilephoto, String biography) {
+    public Users(Long id, String username, Year birthday, String mail, String password,  String profilephoto, String biography) {
         this.id = id;
         this.username = username;
         this.birthday = birthday;
@@ -94,11 +96,11 @@ public class Users {
         this.password = password;
     }
 
-    public String getProfilePhoto() {
+    public String getProfilephoto() {
         return profilephoto;
     }
 
-    public void setProfilePhoto(String profilephoto) {
+    public void setProfilephoto(String profilephoto) {
         this.profilephoto = profilephoto;
     }
 
