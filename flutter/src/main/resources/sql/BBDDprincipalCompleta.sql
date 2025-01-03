@@ -49,6 +49,15 @@ CREATE TABLE FriendRequests (
 
 );
 
+
+CREATE TABLE AchievementsFavorites (
+    id int AUTO_INCREMENT PRIMARY KEY,
+    userId int NOT NULL,
+    achievementId int NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(id) ON DELETE CASCADE,
+    FOREIGN KEY (achievementId) REFERENCES Achievements(id) ON DELETE CASCADE
+);
+
 CREATE TABLE Messages(
   id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	senderid int,

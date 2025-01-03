@@ -8,6 +8,8 @@ import java.util.UUID;
 
 import java.util.Base64; 
 import java.nio.file.Path; 
+import com.dam2.flutter.service.AchievementsFavoritesService;
+import com.dam2.flutter.entity.AchievementsFavorites;
 
 import com.dam2.flutter.entity.Achievements;
 import com.dam2.flutter.entity.Categories;
@@ -64,6 +66,10 @@ public class ApiController {
     //objeto para guardar las solicitudes de amistad
     @Autowired
     private FriendRequestsService friendRequestsService;
+
+    @Autowired //inyeccion de dependencias
+    private AchievementsFavoritesService achievementsFavoritesService; //objeto de la interfaz UserAchievementsService "tendra los atributos de la classe UserAchievements desde achievementsdao..."
+
 
 //USUARIOS!!----------------------------------------------------------------------------------------
 // metodo para retornar usuarios
@@ -271,6 +277,16 @@ public class ApiController {
         return achievementsService.findAll();
     }
 
+    //buscar objetivo que contenga un texto en titulo od escripción
+
+    @GetMapping("/achievements/search")
+    public ResponseEntity<List<Achievements>> searchAchievements(@RequestParam String query) {
+        List<Achievements> achievements = achievementsService.searchAchievements(query);
+        if (achievements.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 No Content si no hay resultados
+        }
+        return ResponseEntity.ok(achievements); // 200 OK con la lista de logros
+    }
 
 //USERACHIEVEMENTS!!--------------------------------------------------------------------------------------
 // devolver si el userachievements existe o no
@@ -372,4 +388,46 @@ public class ApiController {
         // Si la solicitud de amistad no existe, devolver error 404
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
+    //FAVORITEACHIEVEMENTS!!--------------------------------------------------------------------------------------
+
+
+ // Devolver la lista de favoritos de un determinado usuario
+ @GetMapping("/achievementsfavorites/{userId}")
+ public ResponseEntity<List<AchievementsFavorites>> findAchievementsFavoritesByUserId(@PathVariable Long userId) {
+     List<AchievementsFavorites> favoriteAchievements = achievementsFavoritesService.findByUserId(userId);
+     if (favoriteAchievements.isEmpty()) {
+         return ResponseEntity.notFound().build(); // 404 Not Found
+     }
+     return ResponseEntity.ok(favoriteAchievements); // 200 OK
+ }   
+
+
+ @PostMapping("/achievementsfavorites")
+ @ResponseStatus(HttpStatus.CREATED)
+ public AchievementsFavorites addFavorite(@RequestBody AchievementsFavorites achievementsfavorites) {
+    return achievementsFavoritesService.saveFavorite(achievementsfavorites);
+}
+
+
+
+@DeleteMapping("/achievementsfavorites/{userId}/{achievementId}")
+public ResponseEntity<String> deleteFavorite(@PathVariable int userId, @PathVariable int achievementId) {
+    AchievementsFavorites achievementFavorite = achievementsFavoritesService.findByUserIdAndAchievementId(userId, achievementId);
+    if (achievementFavorite == null) {
+        return ResponseEntity.notFound().build(); // Si no se encuentra, devolver 404
+    }
+
+    achievementsFavoritesService.deleteFavorite(achievementFavorite); // Lógica para eliminar
+    return ResponseEntity.ok("Deleted favorite achievement for user " + userId);
+}
+
+@GetMapping("/achievementsfavorites/{userId}/{achievementId}")
+public ResponseEntity<Object> findByUserIdAndAchievementId(@PathVariable int userId, @PathVariable int achievementId) {
+    AchievementsFavorites achievementFavorite = achievementsFavoritesService.findByUserIdAndAchievementId(userId, achievementId);
+    if (achievementFavorite == null) {
+        return ResponseEntity.notFound().build(); // 404 Not Found
+    }
+    return ResponseEntity.ok(achievementFavorite); // 200 OK
+}  
 }

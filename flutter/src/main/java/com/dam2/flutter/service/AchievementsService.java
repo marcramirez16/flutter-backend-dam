@@ -12,6 +12,7 @@ public interface AchievementsService {
     void deleteById(Long id);
 
     List<Achievements> findAll();
+    List<Achievements> searchAchievements(String text);
 
     
 }

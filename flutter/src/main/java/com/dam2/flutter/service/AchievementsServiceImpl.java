@@ -45,4 +45,9 @@ public class AchievementsServiceImpl implements AchievementsService {
     public List<Achievements> findAll() {
         return achievementsDAO.findAll();
     }
+
+    //BUSCA un logro que contenga un texto en titulo od escripcion
+    public List<Achievements> searchAchievements(String text) {
+        return achievementsDAO.findByTitleOrDescriptionContaining(text);
+    }
 }
