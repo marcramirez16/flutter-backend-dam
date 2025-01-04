@@ -49,7 +49,6 @@ CREATE TABLE FriendRequests (
 
 );
 
-
 CREATE TABLE AchievementsFavorites (
     id int AUTO_INCREMENT PRIMARY KEY,
     userId int NOT NULL,
@@ -70,6 +69,7 @@ INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) V
 INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '');
 INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '');
 
+select * from Friendships;
 #Añadir unos cuantos amigos, solicitudes y userachievements a marc
 INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
 
