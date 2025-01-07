@@ -75,9 +75,9 @@ CREATE TABLE Messages(
 );
 
 #Añadimos usuarios
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch, reddit, steam, epicgames, nswitch, psn, xbox) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch, reddit, steam, epicgames, nswitch, psn, xbox) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch, reddit, steam, epicgames, nswitch, psn, xbox) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius', NULL, NULL, NULL, NULL, NULL, NULL);
 
 #Añadir unos cuantos amigos, solicitudes y userachievements a marc
 INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
