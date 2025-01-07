@@ -124,9 +124,38 @@ public class ApiController {
             existingUser.setPassword(updatedUser.getPassword()); // Actualizar password
         }
         if (updatedUser.getBiography() != null) {
-            existingUser.setBiography(updatedUser.getBiography()); // Actualizar password
+            existingUser.setBiography(updatedUser.getBiography()); // Actualizar biografia
         }
-
+        if (updatedUser.getYoutube() != null) {
+            existingUser.setYoutube(updatedUser.getYoutube()); // Actualizar Youtube
+        }
+        if (updatedUser.getTwitterx() != null) {
+            existingUser.setTwitterx(updatedUser.getTwitterx()); // Actualizar Twitterx
+        }
+        if (updatedUser.getFacebook() != null) {
+            existingUser.setFacebook(updatedUser.getFacebook()); // Actualizar Facebook
+        }
+        if (updatedUser.getTwitch() != null) {
+            existingUser.setTwitch(updatedUser.getTwitch()); // Actualizar Twitch
+        }
+        if (updatedUser.getReddit() != null) {
+            existingUser.setReddit(updatedUser.getReddit()); // Actualizar Reddit
+        }
+        if (updatedUser.getSteam() != null) {
+            existingUser.setSteam(updatedUser.getSteam()); // Actualizar Steam
+        }
+        if (updatedUser.getEpicgames() != null) {
+            existingUser.setEpicgames(updatedUser.getEpicgames()); // Actualizar Epicgames
+        }
+        if (updatedUser.getNswitch() != null) {
+            existingUser.setNswitch(updatedUser.getNswitch()); // Actualizar Nswitch
+        }
+        if (updatedUser.getPsn() != null) {
+            existingUser.setPsn(updatedUser.getPsn()); // Actualizar Psn
+        }
+        if (updatedUser.getXbox() != null) {
+            existingUser.setXbox(updatedUser.getXbox()); // Actualizar Xbox
+        }
 
         usersService.save(existingUser); //guardar usuario
         

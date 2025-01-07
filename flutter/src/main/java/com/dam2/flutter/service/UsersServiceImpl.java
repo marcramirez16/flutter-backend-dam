@@ -52,4 +52,24 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
+    @Override
+    public void updateSocial(Long id, String field, String value) {
+        Users user = usersDAO.findById(id).orElse(null);
+        if (user != null) {
+            switch (field) {
+                case "youtube": user.setYoutube(value); break;
+                case "twitterx": user.setTwitterx(value); break;
+                case "facebook": user.setFacebook(value); break;
+                case "twitch": user.setTwitch(value); break;
+                case "reddit": user.setReddit(value); break;
+                case "steam": user.setSteam(value); break;
+                case "epicgames": user.setEpicgames(value); break;
+                case "nswitch": user.setNswitch(value); break;
+                case "psn": user.setPsn(value); break;
+                case "xbox": user.setXbox(value); break;
+            }
+            usersDAO.save(user);
+        }
+    }
+    
 }

@@ -8,8 +8,18 @@ CREATE TABLE Users(
   birthday year NOT NULL,
   mail varchar(40) NOT NULL,
   password varchar(13) NOT NULL,
-  profilephoto varchar(50000),
-  biography varchar(255)
+  profilephoto blob(50000),
+  biography varchar(255),
+  youtube varchar(90),
+  twitterx varchar(90),
+  facebook varchar(90),
+  twitch varchar(90),
+  reddit varchar(90),
+  steam varchar(90),
+  epicgames varchar(90),
+  nswitch varchar(90),
+  psn varchar(90),
+  xbox varchar(90)
 );
 
 CREATE TABLE Categories (
@@ -65,14 +75,13 @@ CREATE TABLE Messages(
 );
 
 #Añadimos usuarios
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, '');
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '');
-INSERT INTO Users(username, birthday, mail, password, profilephoto, biography) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '');
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Marc',2000,'marcramirezmoya@gmail.com','1234', NULL, 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Roc',2000,'roviraroc@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
+INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, youtube, twitterx, facebook, twitch) VALUES ('Miquel',2000,'perezvelasco.miguel@gmail.com','1234', NULL, '', 'elrubiusOMG', 'rubiu5', 'ElrubiusOMG-337992166223323', 'Rubius');
 
-select * from Friendships;
 #Añadir unos cuantos amigos, solicitudes y userachievements a marc
 INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
-
+INSERT INTO Friendships (friendA, friendB) VALUES (3, 1);
 INSERT INTO FriendRequests (userSender, userReciever) VALUES (3, 1);
 
 INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (18, 2, 20, 2);
