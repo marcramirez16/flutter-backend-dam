@@ -83,6 +83,7 @@ INSERT INTO Users(username, birthday, mail, password, profilephoto, biography, y
 INSERT INTO Friendships (friendA, friendB) VALUES (1, 2);
 INSERT INTO Friendships (friendA, friendB) VALUES (3, 1);
 INSERT INTO FriendRequests (userSender, userReciever) VALUES (3, 1);
+INSERT INTO FriendRequests (userSender, userReciever) VALUES (3, 2);
 
 INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (18, 2, 20, 2);
 INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (20, 1, 2, 13);
@@ -96,6 +97,7 @@ INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (23
 INSERT INTO Categories (name, icon) VALUES ('Musica', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Gastronomia', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Anime', NULL);
+INSERT INTO Categories (name, icon) VALUES ('Ver para Creer', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Lectura', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Deporte', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Cine', NULL);
