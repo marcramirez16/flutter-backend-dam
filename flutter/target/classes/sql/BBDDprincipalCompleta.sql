@@ -97,7 +97,7 @@ INSERT INTO Userachievements (achievementid, userid, likes, dislikes) VALUES (23
 INSERT INTO Categories (name, icon) VALUES ('Musica', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Gastronomia', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Anime', NULL);
-INSERT INTO Categories (name, icon) VALUES ('Ver para Creer', NULL);
+INSERT INTO Categories (name, icon) VALUES ('Viajes', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Lectura', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Deporte', NULL);
 INSERT INTO Categories (name, icon) VALUES ('Cine', NULL);
